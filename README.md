@@ -11,3 +11,7 @@ pip install -e .
 ```bash
 pip install -e .[vision]
 ```
+
+## Examples
+
+You need to have the `reachy_mini` package installed in the same venv to run the examples.
