@@ -15,6 +15,7 @@ dependencies = []
 [project.optional-dependencies]
 dev = ["pytest", "ruff==0.12.0"]
 vision = ["mediapipe==0.10.21", "opencv-python<=5.0"]
+moves = ["soundfile==0.13.1", "sounddevice==0.5.1"]
 
 [project.scripts]
 
