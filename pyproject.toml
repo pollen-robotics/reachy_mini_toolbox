@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "reachy_mini_toolbox"
-version = "1.0.0"
+version = "1.0.1"
 authors = [{ name = "Pollen Robotics", email = "contact@pollen-robotics.com" }]
 description = ""
 readme = "README.md"
@@ -14,7 +14,7 @@ dependencies = []
 
 [project.optional-dependencies]
 dev = ["pytest", "ruff==0.12.0"]
-vision = ["mediapipe==0.10.21", "opencv-python<=5.0"]
+vision = ["mediapipe==0.10.14", "opencv-python<=5.0"]
 moves = ["soundfile==0.13.1", "sounddevice==0.5.1"]
 
 [project.scripts]
