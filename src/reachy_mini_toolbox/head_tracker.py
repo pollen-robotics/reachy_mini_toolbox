@@ -69,7 +69,7 @@ def main():
 
                 eye_center, roll = head_tracker.get_head_position(im)
                 if eye_center is not None:
-                    draw_debug(im, eye_center, roll)
+                    # draw_debug(im, eye_center, roll)
 
                     target = [0, 0]
                     error = np.array(target) - eye_center  # [-1, 1] [-1, 1]
