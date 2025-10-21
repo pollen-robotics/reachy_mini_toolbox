@@ -5,7 +5,6 @@ import time
 import cv2
 import numpy as np
 from reachy_mini import ReachyMini
-from reachy_mini.utils.camera import find_camera
 
 # from head_tracker import HeadTracker
 from scipy.spatial.transform import Rotation as R
@@ -54,23 +53,23 @@ def draw_debug(img, eye_center, roll):
 
 
 def main():
-    cap = find_camera()
 
     head_tracker = HeadTracker()
     pose = np.eye(4)
     euler_rot = np.array([0.0, 0.0, 0.0])
-    kp = 0.3
+    kp = 0.1
     t0 = time.time()
     with ReachyMini() as reachy_mini:
         try:
             while True:
                 t = time.time() - t0
 
-                success, img = cap.read()
+                im = reachy_mini.media.get_frame()
+                # success, img = cap.read()
 
-                eye_center, roll = head_tracker.get_head_position(img)
+                eye_center, roll = head_tracker.get_head_position(im)
                 if eye_center is not None:
-                    draw_debug(img, eye_center, roll)
+                    draw_debug(im, eye_center, roll)
 
                     target = [0, 0]
                     error = np.array(target) - eye_center  # [-1, 1] [-1, 1]
@@ -85,7 +84,7 @@ def main():
                     )  # Adjust height based on vertical error
 
                     reachy_mini.set_target(head=pose)
-                cv2.imshow("test_window", img)
+                cv2.imshow("test_window", im)
 
                 cv2.waitKey(1)
         except KeyboardInterrupt:
