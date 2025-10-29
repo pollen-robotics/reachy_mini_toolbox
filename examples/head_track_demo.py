@@ -5,9 +5,6 @@ import time
 import cv2
 import numpy as np
 from reachy_mini import ReachyMini
-from reachy_mini.utils.camera import find_camera
-
-# from head_tracker import HeadTracker
 from scipy.spatial.transform import Rotation as R
 
 from reachy_mini_toolbox.vision import HeadTracker
@@ -53,19 +50,17 @@ def draw_debug(img, eye_center, roll):
     )
 
 
-cap = find_camera()
-
 head_tracker = HeadTracker()
 pose = np.eye(4)
 euler_rot = np.array([0.0, 0.0, 0.0])
 kp = 0.3
 t0 = time.time()
-with ReachyMini() as reachy_mini:
+with ReachyMini(localhost_only=False, media_backend="gstreamer") as reachy_mini:
     try:
         while True:
             t = time.time() - t0
 
-            success, img = cap.read()
+            img = reachy_mini.media.get_frame()
 
             eye_center, roll = head_tracker.get_head_position(img)
             if eye_center is not None:
