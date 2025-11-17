@@ -1,1 +1,2 @@
 from reachy_mini_toolbox.vision.head_tracker import HeadTracker
+from reachy_mini_toolbox.vision.hand_tracker import HandTracker
