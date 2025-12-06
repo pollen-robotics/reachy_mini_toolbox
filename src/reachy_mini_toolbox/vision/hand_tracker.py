@@ -12,10 +12,13 @@ mp_hands = mp.solutions.hands
 class HandTracker:
     """Hand Tracker using MediaPipe Hands to detect hand positions."""
 
-    def __init__(self, nb_hands=1):
+    def __init__(self, nb_hands=1, model_complexity=1):
         """Initialize the Hand Tracker."""
         self.hands = mp_hands.Hands(
-            static_image_mode=True, max_num_hands=nb_hands, min_detection_confidence=0.5
+            static_image_mode=True,
+            max_num_hands=nb_hands,
+            min_detection_confidence=0.5,
+            model_complexity=model_complexity,
         )
 
     def get_hands_positions(self, img):
