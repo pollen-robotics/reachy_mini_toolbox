@@ -10,10 +10,8 @@ The estimated pose is then used to control the Reachy Mini's head and antennas.
 import cv2 as cv
 import mediapipe as mp
 import numpy as np
-from scipy.spatial.transform import Rotation as R
-
 from reachy_mini import ReachyMini
-from reachy_mini.utils.camera import find_camera
+from scipy.spatial.transform import Rotation as R
 
 
 class PoseEstimator:
@@ -72,8 +70,6 @@ class PoseEstimator:
 
 def main(draw=True):
     """Run the Reachy Mini face tracking example."""
-    cap = find_camera()
-
     face_mesh = mp.solutions.face_mesh.FaceMesh(
         min_detection_confidence=0.5,
         min_tracking_confidence=0.5,
@@ -84,9 +80,9 @@ def main(draw=True):
     with ReachyMini() as reachy_mini:
         try:
             while True:
-                success, img = cap.read()
+                img = reachy_mini.media.get_frame()
 
-                if not success:
+                if img is None:
                     print("Failed to capture image")
                     continue
 
