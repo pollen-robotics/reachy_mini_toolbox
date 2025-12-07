@@ -6,8 +6,6 @@ import cv2
 import numpy as np
 from reachy_mini import ReachyMini
 from reachy_mini.utils.camera import find_camera
-
-# from head_tracker import HeadTracker
 from scipy.spatial.transform import Rotation as R
 
 from reachy_mini_toolbox.vision import HeadTracker
