@@ -4,22 +4,17 @@ Uses the lookat() api to have Reachy Mini follow the user's head movements.
 """
 
 import cv2
-from reachy_mini_toolbox.vision import HeadTracker
 from reachy_mini import ReachyMini
-from reachy_mini.utils.camera import find_camera
 
-cap = find_camera()
-assert cap is not None, (
-    "Could not find a camera. Please specify the camera index with --camera-opencv-id"
-)
+from reachy_mini_toolbox.vision import HeadTracker
 
 head_tracker = HeadTracker()
 
 with ReachyMini() as reachy_mini:
     try:
         while True:
-            success, img = cap.read()
-            if success:
+            img = reachy_mini.media.get_frame()
+            if img is not None:
                 eye_center, roll = head_tracker.get_head_position(img)
                 if eye_center is not None:
                     h, w, _ = img.shape
